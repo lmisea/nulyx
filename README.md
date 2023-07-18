@@ -54,7 +54,7 @@ npm install
 echo "BOT_TOKEN=<BOT_TOKEN>" > .env
 ```
 
-Where **BOT_TOKEN** is the token of the bot you created in Telegram. This is given by the BotFather.
+Where **<BOT_TOKEN>** is the token of the bot you created in Telegram. This is given by the BotFather.
 
 ### Running the bot locally
 
@@ -92,7 +92,7 @@ This will open a browser window where you can log in to your Google account. Aft
 gcloud config set project <PROJECT_ID>
 ```
 
-Where **PROJECT_ID** is the ID of the project you created in Google Cloud Platform.
+Where **<PROJECT_ID>** is the ID of the project you created in Google Cloud Platform.
 
 Then, if you already cloned the repository, **move to the project folder** and you can deploy the function using the following command:
 
@@ -103,9 +103,9 @@ gcloud functions deploy nulyxBot --set-env-vars "BOT_TOKEN=<BOT_TOKEN>" --runtim
 Where:
 
 - **nulyxBot**: The name of the function that will be deployed. This function lives in the _nuylx.js_ file.
-- **BOT_TOKEN**: The token of the bot you created in Telegram. This is given by the BotFather.
-- **PROJECT_ID**: The ID of the project you created in Google Cloud Platform.
-- **REGION**: The region where you want to deploy the function. You can check the available regions for Cloud Functions here: [regions](https://cloud.google.com/functions/docs/locations).
+- **<BOT_TOKEN>**: The token of the bot you created in Telegram. This is given by the BotFather.
+- **<PROJECT_ID>**: The ID of the project you created in Google Cloud Platform.
+- **\<REGION\>**: The region where you want to deploy the function. You can check the available regions for Cloud Functions here: [regions](https://cloud.google.com/functions/docs/locations).
 
 _Note_: I have really tried to use a secret with secret manager for the bot token, but I have not been able to make it work. I will continue to try in the future. But for now, the bot token is passed as an environment variable.
 
@@ -142,7 +142,7 @@ gcloud functions delete nulyxBot --region=<REGION>
 Where:
 
 - **nulyxBot**: The name of the function that will be deleted.
-- **REGION**: The region where the function is deployed.
+- **\<REGION\>**: The region where the function is deployed.
 
 ## License
 
