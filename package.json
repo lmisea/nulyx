@@ -1,0 +1,31 @@
+{
+	"name": "nulyx",
+	"version": "1.0.0",
+	"description": "Nulyx: A Personal Telegram Bot Assistant for Organization and Decision-Making.",
+	"main": "nulyx.js",
+	"scripts": {
+		"test": "echo 'No tests specified'"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/lmisea/nulyx.git"
+	},
+	"author": "Luis Isea (lmisea)",
+	"license": "MIT",
+	"keywords": [
+		"task management",
+		"productivity",
+		"Telegram bot",
+		"Node.js",
+		"Telegraf",
+		"organization",
+		"project management"
+	],
+	"bugs": {
+		"url": "https://github.com/lmisea/nulyx/issues"
+	},
+	"homepage": "https://github.com/lmisea/nulyx#readme",
+	"dependencies": {
+		"telegraf": "^4.12.2"
+	}
+}
