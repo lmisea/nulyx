@@ -17,8 +17,8 @@ bot.command('echo', (ctx) => {
 	ctx.reply(message.join(' '));
 });
 
-// Function to run the bot. This function is the handler for the Lambda function.
-export const nulyxBot = async (event) => {
+// This is the main handler function that will be called by the Lambda function
+export const handler = async (event) => {
 	// Parse the event body
 	const body = JSON.parse(event.body);
 
@@ -33,13 +33,12 @@ export const nulyxBot = async (event) => {
 				message: 'Message received',
 			}),
 		};
-	} else {
-		// If the request is not a Telegram API request, return a 400 response
-		return {
-			statusCode: 400,
-			body: JSON.stringify({
-				message: 'Unsupported request',
-			}),
-		};
 	}
+	// If the request is not a Telegram API request, return a 400 response
+	return {
+		statusCode: 400,
+		body: JSON.stringify({
+			message: 'Unsupported request',
+		}),
+	};
 };
