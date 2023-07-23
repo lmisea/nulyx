@@ -2,7 +2,7 @@
 	"name": "nulyx",
 	"version": "1.0.0",
 	"description": "Nulyx: A Personal Telegram Bot Assistant for Organization and Decision-Making.",
-	"main": "nulyx.js",
+	"main": "nulyx.mjs",
 	"scripts": {
 		"test": "echo 'No tests specified'"
 	},
