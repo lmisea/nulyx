@@ -3,8 +3,10 @@
 	"version": "1.0.0",
 	"description": "Nulyx: A Personal Telegram Bot Assistant for Organization and Decision-Making.",
 	"main": "nulyx.mjs",
+	"type": "module",
 	"scripts": {
-		"test": "echo 'No tests specified'"
+		"test": "echo 'No tests specified'",
+		"build": "tsc"
 	},
 	"repository": {
 		"type": "git",
@@ -27,5 +29,10 @@
 	"homepage": "https://github.com/lmisea/nulyx#readme",
 	"dependencies": {
 		"telegraf": "^4.12.2"
+	},
+	"devDependencies": {
+		"@types/aws-lambda": "^8.10.119",
+		"@types/node": "^20.4.4",
+		"typescript": "^5.1.6"
 	}
 }

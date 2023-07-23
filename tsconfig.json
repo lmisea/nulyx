@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"target": "ES2022",
+		"outDir": "aws_lambda",
+		"skipLibCheck": true
+	},
+	"include": ["src/index.ts", "src/bot.ts"]
+}

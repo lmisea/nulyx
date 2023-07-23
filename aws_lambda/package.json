@@ -1,0 +1,23 @@
+{
+	"name": "nulyx_lambda",
+	"version": "1.0.0",
+	"description": "This package is from Nulyx Personal Bot Assistant and is the one uploaded to aws lambda.",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo 'No test specified'"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/lmisea/nulyx.git"
+	},
+	"author": "Luis Isea (lmisea)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/lmisea/nulyx/issues"
+	},
+	"homepage": "https://github.com/lmisea/nulyx#readme",
+	"dependencies": {
+		"telegraf": "^4.12.2"
+	}
+}

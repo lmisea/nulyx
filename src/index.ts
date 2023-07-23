@@ -1,24 +1,10 @@
-// Import "telegraf" library
-import { Telegraf } from 'telegraf';
-
-// Create a bot instance.
-const bot = new Telegraf(process.env.BOT_TOKEN);
-
-// Start Command
-bot.start((ctx) => ctx.reply('Hello World!'));
-
-// Echo command
-bot.command('echo', (ctx) => {
-	// Split the text message sent by the user
-	const message = ctx.message.text.split(' ');
-	// Remove the first element from array
-	message.shift();
-
-	ctx.reply(message.join(' '));
-});
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { bot } from './bot.js';
 
 // This is the main handler function that will be called by the Lambda function
-export const handler = async (event) => {
+export const handler = async (
+	event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> => {
 	// Parse the event body
 	const body = JSON.parse(event.body);
 
