@@ -5,8 +5,9 @@
 	"main": "nulyx.mjs",
 	"type": "module",
 	"scripts": {
-		"test": "echo 'No tests specified'",
-		"build": "tsc"
+		"test": "node dist/testStart.js",
+		"build": "./build.sh",
+		"create-zip": "./create-zip.sh"
 	},
 	"repository": {
 		"type": "git",

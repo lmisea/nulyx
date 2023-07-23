@@ -1,12 +1,13 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { Update } from 'telegraf/types';
 import { bot } from './bot.js';
 
 // This is the main handler function that will be called by the Lambda function
-export const handler = async (
+export const lambdaHandler = async (
 	event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
 	// Parse the event body
-	const body = JSON.parse(event.body);
+	const body: Update = JSON.parse(event.body);
 
 	// Check if the request is a Telegram API request
 	if (body.hasOwnProperty('update_id')) {

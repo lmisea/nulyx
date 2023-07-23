@@ -6,5 +6,5 @@
 		"outDir": "aws_lambda",
 		"skipLibCheck": true
 	},
-	"include": ["src/index.ts", "src/bot.ts"]
+	"include": ["src/**/*"]
 }
