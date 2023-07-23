@@ -6,8 +6,8 @@
 	"type": "module",
 	"scripts": {
 		"test": "node dist/testStart.js",
-		"build": "./build.sh",
-		"create-zip": "./create-zip.sh"
+		"build": "./scripts/build.sh",
+		"create-zip": "./scripts/create-zip.sh"
 	},
 	"repository": {
 		"type": "git",
