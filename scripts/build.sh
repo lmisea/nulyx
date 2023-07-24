@@ -19,4 +19,4 @@ cp aws_lambda/index.js aws_lambda/bot.js dist/
 echo "Moving the test files to dist folder..."
 mv aws_lambda/test*.js dist/
 
-echo "Done!"
+echo "Project compiled successfully!"

@@ -7,7 +7,9 @@
 	"scripts": {
 		"test": "node dist/testStart.js",
 		"build": "./scripts/build.sh",
-		"create-zip": "./scripts/create-zip.sh"
+		"create-zip": "./scripts/create-zip.sh",
+		"upload-to-lambda": "./scripts/upload-to-lambda.sh",
+		"deploy": "./scripts/deploy.sh"
 	},
 	"repository": {
 		"type": "git",
@@ -20,6 +22,7 @@
 		"productivity",
 		"Telegram bot",
 		"Node.js",
+		"Typescript",
 		"Telegraf",
 		"organization",
 		"project management"

@@ -12,4 +12,4 @@ fi
 echo "Creating zip file..."
 cd aws_lambda/ && zip -r nulyx.zip .
 
-echo "Done!"
+echo "Zip file created successfully!"
