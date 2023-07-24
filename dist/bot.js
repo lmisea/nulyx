@@ -1,3 +1,10 @@
+/*
+ * This file contains the code for the Nulyx Telegram bot.
+ * It is responsible for handling the user's messages and sending replies.
+ * It also contains the code for the commands that the user can send to the bot.
+ * The bot is only available to the user defined in the environment variables.
+ * If the user is not authorized, the bot will exit and no reply will be sent.
+ */
 // Import "telegraf" library
 import { Telegraf } from 'telegraf';
 // Check if the BOT_TOKEN is defined in the environment variables
@@ -9,7 +16,11 @@ if (!TOKEN) {
 }
 // Create a bot instance.
 const bot = new Telegraf(TOKEN);
-// Start Command
+/**
+ * This function handles the /start command.
+ * It sends a welcome message to the user if it is authorized.
+ * Otherwise, it exits the process.
+ */
 bot.start((ctx) => {
     // Check if the chat id is not the one defined in the environment variables
     if (ctx.chat.id !== parseInt(process.env.CHAT_ID)) {
@@ -25,7 +36,10 @@ bot.start((ctx) => {
         `horizons effortlessly. 🚀\n\nLet's embark on this exciting journey ` +
         `together, and together we'll achieve great things! 🌟`);
 });
-// Echo command
+/**
+ * This function handles the /echo command.
+ * It sends a message with the same text as the user's message.
+ */
 bot.command('echo', (ctx) => {
     // Check if the chat id is not the one defined in the environment variables
     if (ctx.chat.id !== parseInt(process.env.CHAT_ID)) {
