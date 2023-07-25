@@ -9,15 +9,14 @@ Nulyx: A Personal Telegram Bot Assistant for Organization and Decision-Making.
 ## To-Do List for the Project
 
 - [x] Create a Telegram bot.
-- [x] Create a Google Cloud Function to deploy the bot.
-- [x] Set the webhook for the bot.
-- [ ] Create a Firestore database to store the data of the bot.
+- [x] Deploy it using AWS Lambda.
+- [ ] Use a free database to store the data of the bot.
 - [ ] Note Storage and Organization: Store and categorize your notes by subject.
 - [ ] Activity Scheduling and Reminders: Schedule activities and receive timely reminders.
 - [ ] Decision-Making Assistance: Save coding project ideas and anime series suggestions for easier decision-making.
 - [ ] Book and Media Tracking: Keep track of the books you've read and the anime/TV series you've watched.
 - [ ] Customization: Personalize Nulyx by adjusting settings and preferences.
-- [x] Create a local based version of the bot, so it can be used without Google Cloud Platform.
+- [x] Create a local based version of the bot, so it can be used without AWS Lambda.
 
 ## Getting Started
 

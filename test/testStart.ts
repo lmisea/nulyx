@@ -7,7 +7,16 @@
 // Import the necessary libraries or types
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import { Update } from 'telegraf/types';
-import { lambdaHandler } from './index.js';
+import { lambdaHandler } from '../aws_lambda/index.js';
+
+// Get the chat id from the environment variables
+const chatId: string | undefined = process.env.CHAT_ID;
+
+// Check if the chat id is defined
+if (!chatId) {
+	console.error('CHAT_ID is not defined in environment variables');
+	process.exit(1);
+}
 
 // This is a Telegram API request for a /start command from an authorized user
 const startCommandUpdate: Update = {
@@ -15,14 +24,14 @@ const startCommandUpdate: Update = {
 	message: {
 		message_id: 164,
 		from: {
-			id: parseInt(process.env.CHAT_ID),
+			id: parseInt(chatId),
 			is_bot: false,
 			first_name: 'Luis Miguel',
 			username: 'lmisea',
 			language_code: 'en',
 		},
 		chat: {
-			id: parseInt(process.env.CHAT_ID),
+			id: parseInt(chatId),
 			first_name: 'Luis Miguel',
 			username: 'lmisea',
 			type: 'private',

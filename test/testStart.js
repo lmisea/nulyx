@@ -3,21 +3,28 @@
  * It simulates a /start command from the user.
  * The objetive of this test is to check if the bot is working properly.
  */
-import { lambdaHandler } from './index.js';
+import { lambdaHandler } from '../aws_lambda/index.js';
+// Get the chat id from the environment variables
+const chatId = process.env.CHAT_ID;
+// Check if the chat id is defined
+if (!chatId) {
+    console.error('CHAT_ID is not defined in environment variables');
+    process.exit(1);
+}
 // This is a Telegram API request for a /start command from an authorized user
 const startCommandUpdate = {
     update_id: 13679231,
     message: {
         message_id: 164,
         from: {
-            id: parseInt(process.env.CHAT_ID),
+            id: parseInt(chatId),
             is_bot: false,
             first_name: 'Luis Miguel',
             username: 'lmisea',
             language_code: 'en',
         },
         chat: {
-            id: parseInt(process.env.CHAT_ID),
+            id: parseInt(chatId),
             first_name: 'Luis Miguel',
             username: 'lmisea',
             type: 'private',

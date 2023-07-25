@@ -8,12 +8,6 @@ if [ ! -d "node_modules" ]; then
     npm install
 fi
 
-# Check if dist folder does not exist
-if [ ! -d "dist" ]; then
-    echo "Creating dist folder..."
-    mkdir dist
-fi
-
 # Check if aws_lambda/node_modules folder does not exist
 if [ ! -d "aws_lambda/node_modules" ]; then
     echo "Installing aws_lambda function dependencies..."
@@ -22,14 +16,10 @@ fi
 
 # Compile the project
 echo "Compiling the project..."
-tsc
+tsc --build
 
-# Copy the compiled files to dist folder
-echo "Copying the files to dist folder..."
-cp aws_lambda/index.js aws_lambda/bot.js dist/
-
-# Move the test files to dist folder
-echo "Moving the test files to dist folder..."
-mv aws_lambda/test*.js dist/
+# Removing test d.ts files and tsconfig.tsbuildinfo
+echo "Removing test d.ts files and tsconfig.tsbuildinfo..."
+rm -f test/*.d.ts test/*.tsbuildinfo
 
 echo "Project compiled successfully!"
