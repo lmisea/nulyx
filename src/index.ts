@@ -3,7 +3,6 @@
  * lambdaHandler will be invoked when the Lambda function is triggered.
  */
 
-// Import the necessary libraries or types
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { Update } from 'telegraf/types';
 import { bot } from './bot.js';

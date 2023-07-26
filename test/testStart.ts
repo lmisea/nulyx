@@ -4,7 +4,6 @@
  * The objetive of this test is to check if the bot is working properly.
  */
 
-// Import the necessary libraries or types
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import { Update } from 'telegraf/types';
 import { lambdaHandler } from '../aws_lambda/index.js';

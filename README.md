@@ -26,7 +26,7 @@ The instructions below will get you a copy of the project up and running on your
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en/) v18.17.0 (This is the version used in the project, but v18.x should work)
-- [npm](https://www.npmjs.com/) (recommended v9.0.0 or higher)
+- [npm](https://www.npmjs.com/) (recommended v9.6.7 or higher)
 
 ### Installing
 
@@ -42,13 +42,7 @@ git clone https://github.com/lmisea/nulyx.git
 cd nulyx && git checkout local
 ```
 
-3. Build the project
-
-```bash
-npm run build
-```
-
-4. Create or rewrite the .env file
+3. Create or rewrite the .env file
 
 ```bash
 echo -e "BOT_TOKEN=<BOT_TOKEN>\nCHAT_ID=<CHAT_ID>" > .env
@@ -72,9 +66,15 @@ Then you can receive the updates and get the chat ID. Finally, you can set the w
 curl https://api.telegram.org/bot<BOT_TOKEN>/setWebhook?url=https://api.telegram.org/bot<BOT_TOKEN>/getUpdates
 ```
 
+4. Build the project
+
+```bash
+npm run build
+```
+
 ### Running the bot locally
 
-To run the bot locally, you must have followed the steps in the [Installing](#installing) section. Then you can run the following command:
+To run the bot locally, you must have followed the steps in the [Installing](#installing) section. Then you can run the following command once you are in the **_local_** branch:
 
 ```bash
 npm run start
@@ -87,9 +87,9 @@ For this project, I have used [**_AWS Lambda_**](https://aws.amazon.com/lambda/)
 ### Prerequisites
 
 - [AWS Account](https://aws.amazon.com/)
-- [AWS CLI](https://aws.amazon.com/cli/) (recommended v2.2.44 or higher)
-- Configured [AWS IAM](https://aws.amazon.com/iam/) for your root user in order to create a new user with the necessary permissions for the bot. You can follow the steps in the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) to create a new user.
-- Previously configured [AWS SSO](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html).
+- [AWS CLI](https://aws.amazon.com/cli/) (recommended v2.13.1 or higher)
+- Configured [AWS IAM](https://aws.amazon.com/iam/) for your root user in order to create a new user with the necessary permissions for the bot. You can follow the steps in the [AWS documentation](https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html) to create a new user with the necessary permissions (AdministratorAccess or PowerUserAccess should work).
+- Previously configured [AWS SSO](https://docs.aws.amazon.com/cli/latest/userguide/sso-configure-profile-token.html).
 - Finally, log in to your SSO profile using the following command:
 
 ```bash
@@ -125,7 +125,7 @@ After you meet the prerequisites in the [Prerequisites](#prerequisites) section 
 npm run deploy
 ```
 
-This script compile the project, create a new zip file with the compiled code, and update the function in AWS Lambda.
+This script compiles the project, creates a new zip file with the compiled code, and updates the function code in AWS Lambda.
 **DISCLAIMER:** This script will not work the first time you deploy the bot. You need to follow the steps in the [Deployment the first time](#deployment-the-first-time) section. And also you need to specify the name of the aws sso profile you are using in the package.json file with the key **awsProfile**.
 
 ## License

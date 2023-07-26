@@ -5,7 +5,6 @@
  * The bot is only available to the user defined in the environment variables.
  * If the user is not authorized, the bot will exit and no reply will be sent.
  */
-// Import "telegraf" library
 import { Telegraf } from 'telegraf';
 // Check if the BOT_TOKEN is defined in the environment variables
 const TOKEN = process.env.BOT_TOKEN;

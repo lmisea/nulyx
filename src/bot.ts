@@ -6,7 +6,6 @@
  * If the user is not authorized, the bot will exit and no reply will be sent.
  */
 
-// Import "telegraf" library
 import { Telegraf } from 'telegraf';
 
 // Check if the BOT_TOKEN is defined in the environment variables
