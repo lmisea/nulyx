@@ -9,7 +9,8 @@
 		"build": "./scripts/build.sh",
 		"create-zip": "./scripts/create-zip.sh",
 		"upload-to-lambda": "./scripts/upload-to-lambda.sh",
-		"deploy": "./scripts/deploy.sh"
+		"deploy": "./scripts/deploy.sh",
+		"start": "node ./aws_lambda/index.js"
 	},
 	"repository": {
 		"type": "git",
@@ -32,6 +33,7 @@
 	},
 	"homepage": "https://github.com/lmisea/nulyx#readme",
 	"dependencies": {
+		"dotenv": "^16.3.1",
 		"telegraf": "^4.12.2"
 	},
 	"devDependencies": {

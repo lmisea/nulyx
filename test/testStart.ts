@@ -5,8 +5,12 @@
  */
 
 import { APIGatewayProxyEvent } from 'aws-lambda';
+import dotenv from 'dotenv';
 import { Update } from 'telegraf/types';
 import { lambdaHandler } from '../aws_lambda/index.js';
+
+// Load the environment variables from the .env file
+dotenv.config();
 
 // Get the chat id from the environment variables
 const chatId: string | undefined = process.env.CHAT_ID;

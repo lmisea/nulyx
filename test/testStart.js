@@ -3,7 +3,10 @@
  * It simulates a /start command from the user.
  * The objetive of this test is to check if the bot is working properly.
  */
+import dotenv from 'dotenv';
 import { lambdaHandler } from '../aws_lambda/index.js';
+// Load the environment variables from the .env file
+dotenv.config();
 // Get the chat id from the environment variables
 const chatId = process.env.CHAT_ID;
 // Check if the chat id is defined

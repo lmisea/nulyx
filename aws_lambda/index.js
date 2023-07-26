@@ -2,7 +2,10 @@
  * This is the main entry point for the nulyxBot Lambda function.
  * lambdaHandler will be invoked when the Lambda function is triggered.
  */
+import dotenv from 'dotenv';
 import { bot } from './bot.js';
+// Load the environment variables from the .env file
+dotenv.config();
 /**
  * This function is the handler for the AWS Lambda function.
  * If the event is a Telegram API request, it will pass it to the bot instance.
@@ -34,3 +37,7 @@ export const lambdaHandler = async (event) => {
         }),
     };
 };
+console.log('Launching the bot locally...');
+console.log('Press Ctrl-C to stop the bot');
+// Launch the bot locally
+bot.launch();

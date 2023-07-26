@@ -6,7 +6,11 @@
  * If the user is not authorized, the bot will exit and no reply will be sent.
  */
 
+import dotenv from 'dotenv';
 import { Telegraf } from 'telegraf';
+
+// Load the environment variables from the .env file
+dotenv.config();
 
 // Check if the BOT_TOKEN is defined in the environment variables
 const TOKEN: string | undefined = process.env.BOT_TOKEN;

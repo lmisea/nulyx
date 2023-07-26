@@ -4,8 +4,12 @@
  */
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import dotenv from 'dotenv';
 import { Update } from 'telegraf/types';
 import { bot } from './bot.js';
+
+// Load the environment variables from the .env file
+dotenv.config();
 
 /**
  * This function is the handler for the AWS Lambda function.
@@ -41,3 +45,9 @@ export const lambdaHandler = async (
 		}),
 	};
 };
+
+console.log('Launching the bot locally...');
+console.log('Press Ctrl-C to stop the bot');
+
+// Launch the bot locally
+bot.launch();
