@@ -20,11 +20,12 @@ Nulyx: A Personal Telegram Bot Assistant for Organization and Decision-Making.
 
 ## Getting Started
 
-You can fork or clone this repository to get a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. The instructions below will get you a copy of the project up and running on your local machine for development and testing purposes.
+You can clone this repository to get a copy of the project up and running on your local machine for development and testing purposes. See [Deployment with AWS Lambda](#deployment-with-aws-lambda) for notes on how to deploy the project using AWS Lambda.
+The instructions below will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/) (recommended v20.0.0 or higher)
+- [Node.js](https://nodejs.org/en/) v18.17.0 (This is the version used in the project, but v18.x should work)
 - [npm](https://www.npmjs.com/) (recommended v9.0.0 or higher)
 
 ### Installing
@@ -35,113 +36,97 @@ You can fork or clone this repository to get a copy of the project up and runnin
 git clone https://github.com/lmisea/nulyx.git
 ```
 
-1. Move to the project folder and switch to the local branch
+2. Move to the project folder and switch to the local branch
 
 ```bash
 cd nulyx && git checkout local
 ```
 
-3. Install the dependencies
+3. Build the project
 
 ```bash
-npm install
+npm run build
 ```
 
-3. Rewrite the .env file
+4. Create or rewrite the .env file
 
 ```bash
-echo "BOT_TOKEN=<BOT_TOKEN>" > .env
+echo -e "BOT_TOKEN=<BOT_TOKEN>\nCHAT_ID=<CHAT_ID>" > .env
 ```
 
-Where **<BOT_TOKEN>** is the token of the bot you created in Telegram. This is given by the BotFather.
+Where **<BOT_TOKEN>** is the token of the bot you created in Telegram. This is given by the BotFather. And **<CHAT_ID>** is the ID of the chat where you want to receive the messages from the bot. You can get this ID by sending a message to the bot and then using the following command:
+
+```bash
+curl https://api.telegram.org/bot<BOT_TOKEN>/getUpdates
+```
+
+**Note:** If you have previously set the webhook for the bot, you need to delete it using the following command:
+
+```bash
+curl https://api.telegram.org/bot<BOT_TOKEN>/deleteWebhook
+```
+
+Then you can receive the updates and get the chat ID. Finally, you can set the webhook again using the following command:
+
+```bash
+curl https://api.telegram.org/bot<BOT_TOKEN>/setWebhook?url=https://api.telegram.org/bot<BOT_TOKEN>/getUpdates
+```
 
 ### Running the bot locally
 
-To run the bot locally, you can use the following command:
+To run the bot locally, you must have followed the steps in the [Installing](#installing) section. Then you can run the following command:
 
 ```bash
 npm run start
 ```
 
-## Deployment with Google Cloud Platform
+## Deployment with AWS Lambda
 
-For this project, I have used Google Cloud Platform. I have used Google Cloud Functions to deploy the bot. I am also planning to use Google Cloud Firestore to store the data of the bot. I have used the free tier of Google Cloud Platform, so the cost of the project is totally free.
+For this project, I have used [**_AWS Lambda_**](https://aws.amazon.com/lambda/) to deploy the bot. Basically, AWS Lambda is a serverless computing service that allows you to run code without provisioning or managing servers. It is a great service for running small applications like this bot.
 
-_Note_: In order to use Google Cloud Platform, you need to have a payment method associated with your account. This means you need to have an international credit or debit card. But you will not be charged unless you upgrade to a paid account or exceed the free tier limits (which is very unlikely).
+### Prerequisites
 
-### Deploy a new Nulyx Google Cloud Function
-
-Google Cloud Functions are serverless functions, so they are easy to deploy and maintain. To deploy a new function, you need to have a Google Cloud Platform account and a project created. You can create a new project in the [Google Cloud Console](https://console.cloud.google.com/).
-
-I have used the [Google Cloud SDK](https://cloud.google.com/sdk) to deploy the function. You can install it using the following command (for Linux and macOS):
-
-```bash
-curl https://sdk.cloud.google.com | bash
-```
-
-After installing the SDK, you need to initialize it using the following command:
+- [AWS Account](https://aws.amazon.com/)
+- [AWS CLI](https://aws.amazon.com/cli/) (recommended v2.2.44 or higher)
+- Configured [AWS IAM](https://aws.amazon.com/iam/) for your root user in order to create a new user with the necessary permissions for the bot. You can follow the steps in the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) to create a new user.
+- Previously configured [AWS SSO](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html).
+- Finally, log in to your SSO profile using the following command:
 
 ```bash
-gcloud init
+aws sso login --profile <PROFILE_NAME>
 ```
 
-This will open a browser window where you can log in to your Google account. After that, you will be able to select the project you want to use with:
+Where **<PROFILE_NAME>** is the name of your SSO profile.
+
+### Deployment the first time
+
+This project has a couple of scripts that will help you deploy the bot to AWS Lambda. But they work once the function has been created. So, the first time you deploy the bot, you need to follow the steps below:
+
+- Log in to your [AWS Console](https://console.aws.amazon.com/).
+- Go to the [AWS Lambda](https://aws.amazon.com/lambda/) service.
+- Create a new function.
+- Configure the function as follows:
+  - **Create function from scratch.**
+  - **Function name:** _nulyxBot_.
+  - **Runtime:** _Node.js 18.x_.
+  - **Arquiteture:** _x86_64_.
+  - In the **Advanced settings** section, enable the **Enable function ULR** option.
+  - In the **Auth type** section, select **None**.
+  - Leave the rest of the options as default.
+- Once created, go to the **Configuration** tab.
+- Create two new _Environment variables_: **BOT_TOKEN** and **CHAT_ID**. The values of these variables are the same as in the [Installing](#installing) section.
+- Lastly, go to the **Code** tab and select the **Upload from** option. Then select _.zip file_ and upload the zip file that is in the **_aws_lambda_** folder of the project.
+
+### Deployment after the first time
+
+After you meet the prerequisites in the [Prerequisites](#prerequisites) section and you have followed the steps in the [Deployment the first time](#deployment-the-first-time) section, you can update the bot using the following command:
 
 ```bash
-gcloud config set project <PROJECT_ID>
+npm run deploy
 ```
 
-Where **<PROJECT_ID>** is the ID of the project you created in Google Cloud Platform.
-
-Then, if you already cloned the repository, **move to the project folder** and you can deploy the function using the following command:
-
-```bash
-gcloud functions deploy nulyxBot --set-env-vars "BOT_TOKEN=<BOT_TOKEN>" --runtime nodejs20 --trigger-http --project=<PROJECT_ID> --region=<REGION> --source=. --allow-unauthenticated
-```
-
-Where:
-
-- **nulyxBot**: The name of the function that will be deployed. This function lives in the _nuylx.js_ file.
-- **<BOT_TOKEN>**: The token of the bot you created in Telegram. This is given by the BotFather.
-- **<PROJECT_ID>**: The ID of the project you created in Google Cloud Platform.
-- **\<REGION\>**: The region where you want to deploy the function. You can check the available regions for Cloud Functions here: [regions](https://cloud.google.com/functions/docs/locations).
-
-_Note_: I have really tried to use a secret with secret manager for the bot token, but I have not been able to make it work. I will continue to try in the future. But for now, the bot token is passed as an environment variable.
-
-### Set the webhook for the bot
-
-After deploying the function, you will get a URL. You need to use this URL to set the webhook for the bot. A webhook is a URL that Telegram will use every time a user sends a message to the bot, supplying the message information.
-
-You can set a new webhook for your bot in the Telegram API using the following command:
-
-```bash
-curl -F "url=<URL>" https://api.telegram.org/bot<BOT_TOKEN>/setWebhook
-```
-
-If everything goes well, you will get a response like this:
-
-```json
-{
-	"ok": true,
-	"result": true,
-	"description": "Webhook was set"
-}
-```
-
-After that, **you will be able to use the bot**.
-
-### Delete Nulyx Google Cloud Function
-
-In case you want to delete the function from GCP, you can use the following command:
-
-```bash
-gcloud functions delete nulyxBot --region=<REGION>
-```
-
-Where:
-
-- **nulyxBot**: The name of the function that will be deleted.
-- **\<REGION\>**: The region where the function is deployed.
+This script compile the project, create a new zip file with the compiled code, and update the function in AWS Lambda.
+**DISCLAIMER:** This script will not work the first time you deploy the bot. You need to follow the steps in the [Deployment the first time](#deployment-the-first-time) section. And also you need to specify the name of the aws sso profile you are using in the package.json file with the key **awsProfile**.
 
 ## License
 
