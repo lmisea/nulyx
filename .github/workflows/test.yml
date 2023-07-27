@@ -1,0 +1,30 @@
+# This workflow will build the project with Node.js v18.x and run tests
+
+name: Test Nulyx Bot
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    if: github.ref  == 'refs/heads/develop'
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build with Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm run build
+
+      - name: Run tests
+        env:
+          TOKEN_BOT: ${{ secrets.TOKEN_BOT }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: npm run test
